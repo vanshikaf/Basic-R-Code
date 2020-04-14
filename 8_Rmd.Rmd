@@ -1,0 +1,27 @@
+---
+title: 'table: R Markdown'
+author: "Vanshika"
+date: '2018-10-07'
+output:
+  html_document:
+    df_print: paged
+---
+
+## stargazer 
+```{r stargazerEx, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+library(dplyr)
+library(gapminder)
+library(ggplot2)
+library(stargazer)
+
+m1 <- lm(lifeExp ~ continent, data=gapminder)
+m2 <- lm(lifeExp ~ continent + gdpPercap, data=gapminder)
+m3 <- lm(lifeExp ~ continent + gdpPercap + year, data=gapminder)
+m1
+m2
+m3
+stargazer(m1, m2, m3, type="html",
+          dep.var.labels=("Life Expectancy (Years)"),
+          covariate.labels = c("Americas", "Asia", "Europe", "Oceania", "GDP per capita", "Year"),
+          out="/Users/fote910/Desktop/RData")
+```
